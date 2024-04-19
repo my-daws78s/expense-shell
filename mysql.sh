@@ -41,7 +41,7 @@ VALIDATE $? "Enabling mysqld"
 systemctl start mysqld &>>$LOGFILE
 VALIDATE $? "Starting of mysql"
 
-mysql_secure_installation --set-root-pass $(mysql_secure_password) &>>$LOGFILE
+mysql_secure_installation --set-root-pass $mysql_secure_password &>>$LOGFILE
 ###############################
 
 echo -e "$B Script End time:   $TIMESTAMP $N"
