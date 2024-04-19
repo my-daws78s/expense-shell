@@ -1,7 +1,7 @@
 #!/bin/bash
 
 USERID=$(id -u)
-mysql_secure_password=ExpenseApp@1
+mysql_secure_password="ExpenseApp@1"
 
 if [ $USERID -ne 0 ]
 then
