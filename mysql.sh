@@ -3,6 +3,7 @@
 USERID=$(id -u)
 mysql_secure_password="ExpenseApp@1"
 
+
 if [ $USERID -ne 0 ]
 then
     echo "Pls perform as a root user."
@@ -42,6 +43,8 @@ systemctl start mysqld &>>$LOGFILE
 VALIDATE $? "Starting of mysql"
 
 mysql_secure_installation --set-root-pass $mysql_secure_password &>>$LOGFILE
+VALIDATE $? "Setting up DB password"
+
 ###############################
 
 echo -e "$B Script End time:   $TIMESTAMP $N"
