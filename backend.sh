@@ -4,7 +4,7 @@ USERID=$(id -u)
 TIMESTAMP=$(date +%F-%H-%M-%S)
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 LOGFILE=/tmp/$SCRIPT_NAME-$TIMESTAMP.log
-Enter DB password:
+echo "Enter DB password:"
 read -s mysql_secure_password
 
 #Colors:
