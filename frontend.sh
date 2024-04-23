@@ -5,11 +5,11 @@ SCRIPTNAME=$(echo $? | cut -d "." -f1)
 TIMESTAMP=$(date +%F-%H-%M-%S)
 LOGFILE=/tmp/$SCRIPTNAME-$TIMESTAMP.log
 
-R="\[31m"
-G="\[32m"
-Y="\[33m"
-B="\[34m"
-G="\[0m"
+R="\e[31m"
+G="\e[32m"
+Y="\e[33m"
+B="\e[34m"
+G="\e[0m"
 
 if [ $USERID -ne 0 ]
 then
