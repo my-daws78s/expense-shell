@@ -51,7 +51,8 @@ VALIDATE $? "Starting of mysql"
 # mysql_secure_installation --set-root-pass $mysql_secure_password &>>$LOGFILE
 # VALIDATE $? "Setting up DB password"
 
-mysql -h localhost -uroot -p${mysql_secure_password} -e 'show databases;' &>>$LOGFILE
+#mysql -h localhost -uroot -p${mysql_secure_password} -e 'show databases;' &>>$LOGFILE
+mysql -h db.mydevops-learning.cloud -uroot -p${mysql_secure_password} -e 'show databases;' &>>$LOGFILE
 if [ $? -ne 0 ]
 then
     mysql_secure_installation --set-root-pass ${mysql_secure_password} &>>$LOGFILE
