@@ -22,9 +22,9 @@ fi
 VALIDATE(){
     if [ $1 -ne 0 ]
     then
-        echo "$2 ..... is Failure "
+        echo -e "$2 ... $R Failure. $N"
     else 
-        echo "$2 .... is Success."
+        echo -e "$2 ... $G Success. $N"
     fi
 }
 
