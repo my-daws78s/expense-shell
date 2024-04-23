@@ -40,7 +40,7 @@ echo -e "$B Script Start time: $TIMESTAMP $N"
 dnf list installed mysql-server &>>$LOGFILE
 if [ $? -eq 0 ]
 then
-    VALIDATE $? "MYSQL is already installed"
+    echo -e "MYSQL is already installed.... $Y SKIPPING $N"
 else 
     dnf install mysql-server -y &>>$LOGFILE
     VALIDATE $? "Installation of mysql"
