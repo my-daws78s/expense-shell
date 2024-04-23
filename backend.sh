@@ -8,11 +8,11 @@ echo "Enter DB password:"
 read -s mysql_secure_password
 
 #Colors:
-R="\e[31]"
-G="\e[32]"
-Y="\e[33]"
-B="\e[34]"
-N="\e[0]"
+R="\e[31"
+G="\e[32"
+Y="\e[33"
+B="\e[34"
+N="\e[0"
 
 echo -e "Starting Script at:: $B $TIMESTAMP $N"
 
@@ -29,7 +29,7 @@ VALIDATE(){
     then
         echo -e "$2 is $G SUCCESS. $N"
     else
-        echo -e "$2 is $G FAILURE. $N"
+        echo -e "$2 is $R FAILURE. $N"
         exit 1
     fi
 }
@@ -52,6 +52,7 @@ then
 else 
     useradd expense
     VALIDATE $? "Created user expense: "
+fi
 
 echo -e "Finishing Script at:: $B $TIMESTAMP $N"
 
