@@ -37,8 +37,14 @@ N="\e[0m"
 echo -e "$B Script Start time: $TIMESTAMP $N"
 
 ###############################
-dnf install mysql-server -y &>>$LOGFILE
-VALIDATE $? "Installation of mysql"
+dnf list installed mysql-server &>>$LOGFILE
+if [ $? -ne 0 ]
+then
+    VALIDATE $? "MYSQL is already installed"
+else 
+    dnf install mysql-server -y &>>$LOGFILE
+    VALIDATE $? "Installation of mysql"
+fi
 
 systemctl enable mysqld &>>$LOGFILE
 VALIDATE $? "Enabling mysqld"
