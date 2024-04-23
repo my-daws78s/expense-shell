@@ -64,8 +64,8 @@ fi
 mkdir -p /app &>>$LOGFILE
 VALIDATE $? "Created app directory"
 
-cd /app
 rm -fr /app/*
+cd /app
 unzip /tmp/backend.zip &>>$LOGFILE
 VALIDATE $? "Extracted app directory"
 
