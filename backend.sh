@@ -1,7 +1,7 @@
 #!/bin/bash
 
 USERID=$(id -u)
-TIMESTAMP=$(date-%F+%H+%M+%S)
+TIMESTAMP=$(date_%F+%H+%M+%S)
 SCRIPT_NAME=$(echo $0 | cut -f "." -f1)
 LOGFILE=/tmp/$TIMESTAMP-SCRIPT_NAME.log
 Enter DB password:
