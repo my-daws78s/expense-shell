@@ -1,7 +1,10 @@
 #!/bin/bash
 
 USERID=$(id -u)
-mysql_secure_password="ExpenseApp@1"
+#mysql_secure_password="ExpenseApp@1"
+echo "Enter the mysql password:"
+read -s mysql_secure_password
+
 
 
 if [ $USERID -ne 0 ]
@@ -42,8 +45,18 @@ VALIDATE $? "Enabling mysqld"
 systemctl start mysqld &>>$LOGFILE
 VALIDATE $? "Starting of mysql"
 
-mysql_secure_installation --set-root-pass $mysql_secure_password &>>$LOGFILE
-VALIDATE $? "Setting up DB password"
+#Linux scripting is not idempotent by nature, user needs to take care:
+#Nature of program irrespective of how many times u run, it shud not change result.
+# mysql_secure_installation --set-root-pass $mysql_secure_password &>>$LOGFILE
+# VALIDATE $? "Setting up DB password"
+
+mysql -h localhost -uroot -p${mysql_secure_password} -e 'show databases;' &>>$LOGFILE
+if [ $? -ne 0 ]
+then
+    mysql_secure_installation --set-root-pass ${mysql_secure_password} &>>$LOGFILE
+    VALIDATE $? "Setting up DB password: "
+else 
+    echo -e "mysql password is already setup. $Y SKIPPING $N"
 
 ###############################
 
