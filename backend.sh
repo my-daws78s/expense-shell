@@ -8,11 +8,11 @@ echo "Enter DB password:"
 read -s mysql_secure_password
 
 #Colors:
-R="\e[31"
-G="\e[32"
-Y="\e[33"
-B="\e[34"
-N="\e[0"
+R="\e[31m"
+G="\e[32m"
+Y="\e[33m"
+B="\e[34m"
+N="\e[0m"
 
 echo -e "Starting Script at:: $B $TIMESTAMP $N"
 
