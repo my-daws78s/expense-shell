@@ -60,8 +60,6 @@ else
     VALIDATE $? "Created user expense: "
 fi
 
-echo -e "Finishing Script at:: $B $TIMESTAMP $N"
-
 #The below command using -p idempotency will be taken care
 mkdir -p /app &>>$LOGFILE
 VALIDATE $? "Created app directory:"
@@ -96,4 +94,4 @@ VALIDATE $? "Validating schema loading:"
 systemctl restart backend &>>$LOGFILE
 VALIDATE $? "Restarting backend:"
 
-echo -e "Ending Script at:: $B $TIMESTAMP $N"
+echo -e "Finishing Script at:: $B $TIMESTAMP $N"
