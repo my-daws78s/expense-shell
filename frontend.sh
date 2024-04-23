@@ -22,10 +22,10 @@ fi
 VALIDATE(){
     if [ $1 -ne 0 ]
     then
-        echo -e "$2 ... $R Failure. $N"
+        echo -e "$2... $R Failure $N"
         exit 1
     else 
-        echo -e "$2 ... $G Success. $N"
+        echo -e "$2... $G Success $N"
     fi
 }
 
@@ -37,7 +37,7 @@ then
     echo -e "nginx is already installed... $Y SKIPPING $N"
 else 
     dnf install nginx -y &>>$LOGFILE
-    VALIDATE $? "nginx is installed..."
+    VALIDATE $? "Installing nginx"
 fi
 
 systemctl enable nginx &>>$LOGFILE
