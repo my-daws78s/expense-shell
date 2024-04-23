@@ -40,14 +40,20 @@ VALIDATE $? "Disabling nodejs:"
 dnf module enable nodejs:20 -y &>>$LOGFILE
 VALIDATE $? "Enabling nodejs:"
 
-dnf install nodejs -y &>>$LOGFILE
-VALIDATE $? "Installing nodejs:"
+dnf list installed nodejs &>>$LOGFILE
+if [ $? -eq 0 ]
+then
+    echo -e "nodejs is already installed.... $Y SKIPPING $N"
+else 
+    dnf install nodejs -y &>>$LOGFILE
+    VALIDATE $? "Installation of nodejs"
+fi
 
 #Need to handle idempotent nature
 id expense &>>$LOGFILE
 if [ $? -ne 0 ]
 then
-    echo "User expense is alreay created."
+    echo -e "User expense is alreay created..... $Y SKIPPING $N"
     exit 1
 else 
     useradd expense
