@@ -6,6 +6,7 @@ SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 LOGFILE=/tmp/$SCRIPT_NAME-$TIMESTAMP.log
 echo "Enter DB password:"
 read -s mysql_secure_password
+echo "Password for DB is: $mysql_secure_password"
 
 #Colors:
 R="\e[31m"
@@ -35,10 +36,10 @@ VALIDATE(){
 }
 
 dnf module disable nodejs -y &>>$LOGFILE
-VALIDATE $? "Disabling nodejs:"
+VALIDATE $? "Disabling nodejs"
 
 dnf module enable nodejs:20 -y &>>$LOGFILE
-VALIDATE $? "Enabling nodejs:"
+VALIDATE $? "Enabling nodejs"
 
 dnf list installed nodejs &>>$LOGFILE
 if [ $? -eq 0 ]
@@ -54,44 +55,43 @@ id expense &>>$LOGFILE
 if [ $? -eq 0 ]
 then
     echo -e "User expense is alreay created..... $Y SKIPPING $N"
-    exit 1
 else 
     useradd expense &>>$LOGFILE
-    VALIDATE $? "Created user expense: "
+    VALIDATE $? "Created user expense"
 fi
 
 #The below command using -p idempotency will be taken care
 mkdir -p /app &>>$LOGFILE
-VALIDATE $? "Created app directory:"
+VALIDATE $? "Created app directory"
 
 cd /app
 rm -fr /app/*
 unzip /tmp/backend.zip &>>$LOGFILE
-VALIDATE $? "Extracted app directory:"
+VALIDATE $? "Extracted app directory"
 
 npm install &>>$LOGFILE
-VALIDATE $? "Installing npm dependencies:"
+VALIDATE $? "Installing npm dependencies"
 
 cp /home/ec2-user/expense-shell/backend.service /etc/systemd/system/backend.service &>>$LOGFILE 
 VALIDATE $? "Copied backend service"
 
 systemctl daemon-reload &>>$LOGFILE
-VALIDATE $? "Daemon reload:"
+VALIDATE $? "Daemon reload"
 
 systemctl start backend &>>$LOGFILE
-VALIDATE $? "Starting backend:"
+VALIDATE $? "Starting backend"
 
 systemctl enable backend &>>$LOGFILE
-VALIDATE $? "Enabling backend:"
+VALIDATE $? "Enabling backend"
 
 dnf install mysql -y &>>$LOGFILE
-VALIDATE $? "Installing mysql:"
+VALIDATE $? "Installing mysql"
 
 #mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -p${mysql_secure_password} < /app/schema/backend.sql &>>$LOGFILE
 mysql -h db.mydevops-learning.cloud -uroot -p${mysql_secure_password} < /app/schema/backend.sql &>>$LOGFILE
-VALIDATE $? "Validating schema loading:"
+VALIDATE $? "Validating schema loading"
 
 systemctl restart backend &>>$LOGFILE
-VALIDATE $? "Restarting backend:"
+VALIDATE $? "Restarting backend"
 
 echo -e "Finishing Script at:: $B $TIMESTAMP $N"
