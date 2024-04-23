@@ -57,6 +57,7 @@ then
     VALIDATE $? "Setting up DB password: "
 else 
     echo -e "mysql password is already setup. $Y SKIPPING $N"
+fi
 
 ###############################
 
