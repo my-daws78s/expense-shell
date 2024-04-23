@@ -16,7 +16,7 @@ N="\e[0]"
 
 echo -e "Starting Script at:: $B $TIMESTAMP $N"
 
-if [ USERID -ne 0 ]
+if [ $USERID -ne 0 ]
 then
     echo -e "$R User does not have root previleges. Hence cannot process from here. $N"
     exit 1
