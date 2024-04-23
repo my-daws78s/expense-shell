@@ -27,9 +27,9 @@ fi
 VALIDATE(){
     if [ $1 -eq 0 ]
     then
-        echo -e "$2 is $G SUCCESS. $N"
+        echo -e "$2... $G SUCCESS. $N"
     else
-        echo -e "$2 is $R FAILURE. $N"
+        echo -e "$2... $R FAILURE. $N"
         exit 1
     fi
 }
@@ -51,12 +51,12 @@ fi
 
 #Need to handle idempotent nature
 id expense &>>$LOGFILE
-if [ $? -ne 0 ]
+if [ $? -eq 0 ]
 then
     echo -e "User expense is alreay created..... $Y SKIPPING $N"
     exit 1
 else 
-    useradd expense
+    useradd expense &>>$LOGFILE
     VALIDATE $? "Created user expense: "
 fi
 
@@ -95,3 +95,5 @@ VALIDATE $? "Validating schema loading:"
 
 systemctl restart backend &>>$LOGFILE
 VALIDATE $? "Restarting backend:"
+
+echo -e "Ending Script at:: $B $TIMESTAMP $N"

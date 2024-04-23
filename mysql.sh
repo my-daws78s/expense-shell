@@ -5,8 +5,6 @@ USERID=$(id -u)
 echo "Enter the mysql password:"
 read -s mysql_secure_password
 
-
-
 if [ $USERID -ne 0 ]
 then
     echo "Pls perform as a root user."
