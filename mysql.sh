@@ -19,6 +19,7 @@ VALIDATE(){
     if [ $1 -ne 0 ]
     then
         echo -e "$2 .... $R is a Failure. $N"
+        exit 1
     else
         echo -e "$2 .... $G is Success. $N"
     fi
@@ -58,7 +59,6 @@ then
 else 
     echo -e "mysql password is already setup. $Y SKIPPING $N"
 fi
-
 ###############################
 
 echo -e "$B Script End time:   $TIMESTAMP $N"
