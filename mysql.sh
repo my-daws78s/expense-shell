@@ -12,7 +12,7 @@ fi
 #mysql_secure_password="ExpenseApp@1"
 echo "Enter the mysql password:"
 read -s mysql_secure_password
-echo mysql_secure_password is $mysql_secure_password 
+echo "MySql password is $mysql_secure_password"
 
 VALIDATE(){
     if [ $1 -ne 0 ]
