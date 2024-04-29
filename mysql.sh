@@ -1,11 +1,6 @@
 #!/bin/bash
 
 USERID=$(id -u)
-#mysql_secure_password="ExpenseApp@1"
-echo "Enter the mysql password:"
-read -s mysql_secure_password
-echo mysql_secure_password is $mysql_secure_password 
-
 if [ $USERID -ne 0 ]
 then
     echo "Pls perform as a root user."
@@ -13,6 +8,11 @@ then
 else 
     echo "You are a root user."
 fi
+
+#mysql_secure_password="ExpenseApp@1"
+echo "Enter the mysql password:"
+read -s mysql_secure_password
+echo mysql_secure_password is $mysql_secure_password 
 
 VALIDATE(){
     if [ $1 -ne 0 ]
